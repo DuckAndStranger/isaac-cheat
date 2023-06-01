@@ -1,4 +1,7 @@
 import PySimpleGUI as sg
+from PyQt6.QtGui import QPalette, QColor
+from PyQt6.QtCore import QSize, Qt
+from PyQt6.QtWidgets import QVBoxLayout, QApplication, QWidget, QPushButton, QMainWindow
 from ReadWriteMemory import ReadWriteMemory
 import win32process
 import win32api
@@ -7,10 +10,11 @@ from threading import Thread
 from pynput import keyboard
 from time import sleep
 import winsound
+import sys
 
 #variables
 points = {}
-check = {"coins": 0, 'bombs': 0, 'keys': 0, 'red_hearts': 0, "charges": 0, 'dmgs': 0, "blue_hearts": 0, "active_item": 0}
+check = {"coins": False, 'bombs': False, 'keys': False, 'red_hearts': False, "charges": False, 'dmgs': False, "blue_hearts": False, "active_item": False}
 address = 0
 coins_point=0
 base_address=0
@@ -102,7 +106,7 @@ def languageChange():
 def close():
     global win_close
     win_close=1
-    window.close()    
+    #window.close()    
 
 ###############################################################################
 
@@ -123,6 +127,7 @@ class Changeable:
     def __init__(self, name, num = 99) -> None:
         self.name = name
         self.num = num
+        window.create_button(name)
     def infWrite(self):
         global check
         if check[self.name] == 0:
@@ -145,6 +150,50 @@ class Changeable:
                 text = "Вы ввели не целое число!"
             sg.popup(text, title="ERROR!")
 
+
+
+###############################################################################
+#-----НОВОЕ ОКНО------
+
+#Кнопка ого
+class Button(QPushButton):
+    def __init__(self, name):
+        super(Button, self).__init__()
+        self.name = name
+        self.setText(name)
+        self.setCheckable(True)
+        self.clicked.connect(self.the_button_was_toggled)
+        self.setChecked(check[self.name])
+
+    def the_button_was_toggled(self, checked):
+        check[self.name] = checked
+        print(self.name, check[self.name])
+
+    
+
+#Класс окна, все настраиваем тут
+class MainWindow(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Isaac Cheats")
+        self.layout = QVBoxLayout()
+        self.button_checked = {}
+
+    def create_button(self, name):
+        self.button_checked[name] = False
+        button = Button(name)
+        self.layout.addWidget(button)
+
+    def initiate(self):
+        widget = QWidget()
+        widget.setLayout(self.layout)
+        self.setCentralWidget(widget)
+        
+
+app = QApplication(sys.argv)
+window = MainWindow()
+
 coin = Changeable("coins")
 bomb = Changeable("bombs")
 key = Changeable("keys")
@@ -154,18 +203,23 @@ blue_hearts = Changeable("blue_hearts", 8)
 dmgs = Changeable("dmgs", 1120403000)
 active = Changeable("active_item")
 
+window.initiate()
+window.show()
+app.exec() #Открытие
+
 ###############################################################################
 
 #window logic
-window = (layout(language))
+#window = (layout(language))
 def main():
     global coins_point,address,process,process_hook_status,win_close
     global process,base_address
     global coins, bombs,keys,win_close,process_hook_status,language,window
-    event, values = window.read(timeout=10)
+    #event, values = window.read(timeout=10)
 
-    if values == None:
-        values = [None, None, None, None]
+    #if values == None:
+    values = [None, None, None, None]
+    event = None
 
     eventFunc = {
         "inf_coins": coin.infWrite,
@@ -207,7 +261,7 @@ def hotkeys():
         "<ctrl>+6":blue_hearts.infWrite,
         "<ctrl>+7":charge.infWrite}) as hotkey:
         hotkey.join()
-Thread(target=hotkeys).start()
+#Thread(target=hotkeys).start()
 
 ###############################################################################
 
@@ -259,12 +313,12 @@ def inf_hook():
 
 #baza 
 main()
-while True:
-    if win_close==1:
-        for i in check:
-            i = 0
-        hotkey.stop()
-        break
-    else:
-        main()
+# while True:
+#     if win_close==1:
+#         for i in check:
+#             i = 0
+#         #hotkey.stop()
+#         break
+#     else:
+#         main()
 ###############################################################################
