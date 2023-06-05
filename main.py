@@ -1,7 +1,8 @@
 import PySimpleGUI as sg
 from PyQt6.QtGui import QPalette, QColor
 from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtWidgets import QVBoxLayout, QApplication, QWidget, QPushButton, QMainWindow
+from PyQt6.QtWidgets import QVBoxLayout, QApplication, QWidget, QPushButton, QMainWindow, QLineEdit, QHBoxLayout, QGridLayout
+from PyQt6.QtGui import QIntValidator
 from ReadWriteMemory import ReadWriteMemory
 import win32process
 import win32api
@@ -124,10 +125,13 @@ def write_and_error_window(value,thing):
 ###############################################################################
 
 class Changeable:
-    def __init__(self, name, num = 99) -> None:
+    def __init__(self, name, num = 99, line = False, checked = True) -> None:
         self.name = name
         self.num = num
-        window.create_button(name)
+        if line:
+            window.create_line(name, checked)
+        else:
+            window.create_button(name, checked)
     def infWrite(self):
         global check
         if check[self.name] == 0:
@@ -157,19 +161,58 @@ class Changeable:
 
 #Кнопка ого
 class Button(QPushButton):
-    def __init__(self, name):
+    def __init__(self, name, checked = True):
         super(Button, self).__init__()
         self.name = name
         self.setText(name)
-        self.setCheckable(True)
+        if checked:
+            self.setCheckable(True)
         self.clicked.connect(self.the_button_was_toggled)
-        self.setChecked(check[self.name])
+        if checked:
+            try:
+                self.setChecked(check[self.name])
+            except:
+                pass
 
     def the_button_was_toggled(self, checked):
         check[self.name] = checked
         print(self.name, check[self.name])
 
-    
+class SpecialButton(QPushButton):
+    def __init__(self, name):
+        super(QPushButton, self).__init__()
+        self.setText(name)
+        self.setBaseSize(10, 10)
+        if name == "Hook":
+            self.clicked.connect(self.hook)
+        else:
+            self.clicked.connect(self.lang)
+        
+    def hook(self):
+        pass
+
+    def lang(self):
+        pass
+
+class LineEdit(QHBoxLayout):
+    def __init__(self, name, checked=True):
+        super(QHBoxLayout, self).__init__()
+        self.name = name
+        self.input = QLineEdit()
+        self.onlyInt = QIntValidator()
+        self.onlyInt.setRange(0, 999)
+        self.input.setValidator(self.onlyInt)
+        self.input.setFixedWidth(150)
+        self.addWidget(self.input)
+        self.button1 = QPushButton("Изменить")
+        self.button2 = Button(name, checked)
+        self.button1.clicked.connect(self.get)
+        self.addWidget(self.button1)
+        self.addWidget(self.button2)
+
+    def get(self):
+        text = self.input.text()
+        print(text)
 
 #Класс окна, все настраиваем тут
 class MainWindow(QMainWindow):
@@ -177,31 +220,49 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Isaac Cheats")
+        self.setFixedSize(330, 290)
         self.layout = QVBoxLayout()
         self.button_checked = {}
 
-    def create_button(self, name):
-        self.button_checked[name] = False
-        button = Button(name)
+    def create_button(self, name, checked = True):
+        try:
+            self.button_checked[name] = False
+        except:
+            pass
+        button = Button(name, checked)
         self.layout.addWidget(button)
 
+    def create_line(self, name, checked):
+        self.button_checked[name] = False
+        line = LineEdit(name, checked)
+        self.layout.addLayout(line)
+
     def initiate(self):
-        widget = QWidget()
-        widget.setLayout(self.layout)
-        self.setCentralWidget(widget)
-        
+        self.widget = QWidget()
+        self.widget.setLayout(self.layout)
+        self.setCentralWidget(self.widget)
+
+    def addLayout(self, layout):
+        self.layout.addLayout(layout)
 
 app = QApplication(sys.argv)
 window = MainWindow()
 
-coin = Changeable("coins")
-bomb = Changeable("bombs")
-key = Changeable("keys")
+fbuttons = QGridLayout()
+hook = SpecialButton("Hook")
+lang = SpecialButton("EN/RU")
+fbuttons.addWidget(hook)
+fbuttons.addWidget(lang)
+window.addLayout(fbuttons)
+
+coin = Changeable("coins", line=True)
+bomb = Changeable("bombs", line=True)
+key = Changeable("keys", line=True)
+active = Changeable("active_item", line=True, checked=False)
 red_hearts = Changeable("red_hearts", 24)
 charge = Changeable("charges", 6)
 blue_hearts = Changeable("blue_hearts", 8)
 dmgs = Changeable("dmgs", 1120403000)
-active = Changeable("active_item")
 
 window.initiate()
 window.show()
