@@ -15,10 +15,8 @@ import sys
 
 #variables
 points = {}
-check = {"coins": False, 'bombs': False, 'keys': False, 'red_hearts': False, "charges": False, 'dmgs': False, "blue_hearts": False, "active_item": False}
-address = 0
+check = {"coins": 0, 'bombs': 0, 'keys': 0, 'red_hearts': 0, "charges": 0, 'dmgs': 0, "blue_hearts": 0, "active_item": 0}
 coins_point=0
-base_address=0
 language = "ru"
 dmg =0
 red_heart=0
@@ -26,29 +24,12 @@ coins = 0
 bombs = 0
 keys = 0
 win_close=0
-process_hook_status=0
 charges=0
 blue_heart=0
 process_hook_stop=0
 ###############################################################################
 
-#process hook
-def process_hook():
-    global process,base_address
-    my_pid = None
-    pids = psutil.pids()
-    for pid in pids:
-        ps = psutil.Process(pid) 
-        if "isaac-ng.exe" in ps.name():
-            my_pid = ps.pid
-    PROCESS_ALL_ACCESS = 0x1F0FFF
-    processHandle = win32api.OpenProcess(PROCESS_ALL_ACCESS, False, my_pid)
-    modules = win32process.EnumProcessModules(processHandle)
-    processHandle.close()
-    base_address = modules[0]
-    rwm = ReadWriteMemory()
-    process = rwm.get_process_by_name("isaac-ng.exe")
-    process.open()
+
 ###############################################################################
 
 #window config
@@ -69,7 +50,7 @@ def layout(language):
         [sg.Text("")],
         [sg.Button('Выход',key="Exit"),sg.Text("",s=35),sg.Text("Made by GAVKOSHMIG Inc.")]]
     else:
-        main_window_layout = [  [sg.Text("Only integer numbers",s=57),sg.Button("RU/EN",key = "Change_language",s=6)],
+        main_window_layout = [  [sg.Text("Only integer numbers",s=47),sg.Button("Hook",key="new_run",s=6),sg.Button("RU/EN",key = "Change_language",s=6)],
         [sg.Text('Coins',s=8), sg.InputText(),sg.Button("Change",key="Change_coins"),sg.Button("Inf 99",key="inf_coins",s=4)],
         [sg.Text('Bombs',s=8), sg.InputText(),sg.Button("Change",key="Change_bombs"),sg.Button("Inf 99",key="inf_bombs",s=4)],
         [sg.Text('Keys',s=8), sg.InputText(),sg.Button("Change",key="Change_keys"),sg.Button("Inf 99",key="inf_keys",s=4)],
@@ -85,10 +66,6 @@ def layout(language):
     return sg.Window("Isaac's cheats",main_window_layout)
 ###############################################################################
 
-#error window cfg
-error_window_layout = [[sg.Text("Your input not integer number!")],
-           [sg.Button("Close",key="Close_error")]]
-error_window = sg.Window("Error",error_window_layout)
 
 ###############################################################################
 
@@ -117,9 +94,9 @@ def write_and_error_window(value,thing):
         writei(thing, int(value))
     except:
         winsound.PlaySound("ButtonClick.wav", 1)
-        text = "Your input isn't integer number!"
+        text = "ERROR!"
         if language == "ru": 
-            text = "Вы ввели не целое число!"
+            text = "ERROR!"
         sg.popup(text, title="ERROR!")
 
 ###############################################################################
@@ -322,35 +299,18 @@ def hotkeys():
         "<ctrl>+6":blue_hearts.infWrite,
         "<ctrl>+7":charge.infWrite}) as hotkey:
         hotkey.join()
-#Thread(target=hotkeys).start()
+Thread(target=hotkeys).start()
 
 ###############################################################################
 
 #process hook and pointers
 def inf_hook():
     try:
-        global coins_point,address,process,process_hook_status,win_close
-        global charges,red_heart,blue_heart,coins,bombs,keys,base_address, points
-        my_pid = None
-        pids = None
-        ps = None
-        pids = psutil.pids()
-        for pid in pids:
-            ps = psutil.Process(pid) 
-            if "isaac-ng.exe" in ps.name():
-                my_pid = ps.pid
-        print(my_pid)
-        PROCESS_ALL_ACCESS = 0x1F0FFF
-        processHandle = win32api.OpenProcess(PROCESS_ALL_ACCESS, False, my_pid)
-        modules = win32process.EnumProcessModules(processHandle)
-        processHandle.close()
-        base_address = modules[0]
-        rwm = ReadWriteMemory()
-        process = rwm.get_process_by_name("isaac-ng.exe")
+        global coins_point,process,points
+        process = ReadWriteMemory().get_process_by_name("isaac-ng.exe")
         process.open()
-        address = base_address+0x804270
+        address = process.get_base_address()+0x804270        
         points["coins"] = process.get_pointer(address, offsets=[0x4,0x1C,0x9D0,0x358,0x0,0x12B8])
-        process_hook_status = 1
         points["bombs"] = process.get_pointer(address, offsets=[0x4,0x1C,0x9D0,0x23C,0x16C,0x0,0x12B4])
         points["keys"] = process.get_pointer(address, offsets=[0x4,0x1C,0xBBC,0x16C,0x0,0x12AC])
         points["dmgs"] = process.get_pointer(address,offsets=[0x4,0x1C,0x9D0,0x23C,0x16C,0x0,0x13B8])
@@ -358,6 +318,7 @@ def inf_hook():
         points["charges"] = process.get_pointer(address,offsets=[0x4,0x0,0x4,0x1C,0xCF8,0x0,0x14C8])
         points["active_item"] = process.get_pointer(address,offsets=[0x8,0x1C,0x9F0,0x30,0x358,0x0,0x14C4])
         points["blue_hearts"] = process.get_pointer(address,offsets=[0x4,0x1C,0x9D0,0x50,0x358,0x0,0x129C])
+
         if coins_point == 4792:
             if language == "ru":
                 winsound.PlaySound("ButtonClick.wav", 1)
@@ -369,6 +330,7 @@ def inf_hook():
                 i = 0
     except:
         pass
+
 
 ###############################################################################
 
