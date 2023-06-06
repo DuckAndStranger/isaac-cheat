@@ -134,7 +134,6 @@ window = (layout(language))
 def main():
     global window
     event, values = window.read(timeout=10)
-    print(event)
     if values == None:
         values = [None, None, None, None]
 
