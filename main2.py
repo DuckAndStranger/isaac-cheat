@@ -90,10 +90,8 @@ class Changeable:
     def __init__(self, name, num = 99) -> None:
         self.name = name
         self.num = num
-        print(self.num)
     def infWrite(self):
         global check
-        print(check)
         if check[self.name] == 0:
             check[self.name] = 1
             def everlasting():
@@ -123,7 +121,6 @@ coin_hearts = Changeable("coin_hearts",24)
 charge = Changeable("charges")
 dmg = Changeable("dmg", 1120403000)
 active = Changeable("active_item")
-
 ###############################################################################
 
 #window logic
@@ -148,7 +145,7 @@ def main():
         "Change_keys": [keys.write, values[2]],
         "Change_active_item": [active.write, values[3]],
         "give_d6": [active.write, 105],
-        "inf_coins_herts":[],
+        "inf_coins_herts":coin_hearts.infWrite,
         "new_run":  inf_hook,
         "Change_language": languageChange,
         "Exit": close,
@@ -172,7 +169,6 @@ def inf_hook():
         process = ReadWriteMemory().get_process_by_name("isaac-ng.exe")
         process.open()
         address = process.get_base_address()+0x804270 
-
         pointers["coins"] = process.get_pointer(address, offsets=[0x4,0x1C,0x9D0,0x358,0x0,0x12B8])
         pointers["bombs"] = process.get_pointer(address, offsets=[0x4,0x1C,0x9D0,0x23C,0x16C,0x0,0x12B4])
         pointers["keys"] = process.get_pointer(address, offsets=[0x4,0x1C,0xBBC,0x16C,0x0,0x12AC])
@@ -181,14 +177,13 @@ def inf_hook():
         pointers["charges"] = process.get_pointer(address,offsets=[0x4,0x0,0x4,0x1C,0xCF8,0x0,0x14C8])
         pointers["active_item"] = process.get_pointer(address,offsets=[0x8,0x1C,0x9F0,0x30,0x358,0x0,0x14C4])
         pointers["blue_hearts"] = process.get_pointer(address,offsets=[0x4,0x1C,0x9D0,0x50,0x358,0x0,0x129C])
-        pointers["coin_hearts"] = process.get_pointer(address,offsets=[0x4,0xAC,0xC4,0x9D0,0x358,0x0,0x1294])
         if pointers["coins"] == 4792:
             if language == "ru":
                 winsound.PlaySound("ButtonClick.wav", 1)
-                sg.popup("Невозможно захватить процесс, перезапустите игру!",title="ERROR!")
+                sg.popup("Невозможно захватить процесс, перезапустите игру/забег!",title="ERROR!")
             else:
                 winsound.PlaySound("ButtonClick.wav", 1)
-                sg.popup("Can't hook process, restart the game!",title="ERROR!")
+                sg.popup("Can't hook process, restart the game/the run!",title="ERROR!")
     except:
         pass
 
@@ -216,4 +211,4 @@ while True:
     if win_close == True:
         break
     else: main()
-###############################################################################
+############################################################################### 1112014848
