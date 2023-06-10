@@ -218,7 +218,7 @@ QPushButton:default {
     <property name="styleSheet">
      <string notr="true">QLineEdit{
 	font: 10pt &quot;MS Shell Dlg 2&quot;;
-	border: 2px solid rgb(37, 39, 48, 0);
+	border: 2px solid rgb(37, 39, 48);
 	border-radius: 10px;
 	color: #FFF;
 	padding-left: 20 px;
@@ -247,7 +247,7 @@ QLineEdit:focus{
     <property name="styleSheet">
      <string notr="true">QLineEdit{
 	font: 10pt &quot;MS Shell Dlg 2&quot;;
-	border: 2px solid rgb(37, 39, 48, 0);
+	border: 2px solid rgb(37, 39, 48);
 	border-radius: 10px;
 	color: #FFF;
 	padding-left: 20 px;
@@ -276,7 +276,7 @@ QLineEdit:focus{
     <property name="styleSheet">
      <string notr="true">QLineEdit{
 	font: 10pt &quot;MS Shell Dlg 2&quot;;
-	border: 2px solid rgb(37, 39, 48, 0);
+	border: 2px solid rgb(37, 39, 48);
 	border-radius: 10px;
 	color: #FFF;
 	padding-left: 20 px;
@@ -305,7 +305,7 @@ QLineEdit:focus{
     <property name="styleSheet">
      <string notr="true">QLineEdit{
 	font: 10pt &quot;MS Shell Dlg 2&quot;;
-	border: 2px solid rgb(37, 39, 48, 0);
+	border: 2px solid rgb(37, 39, 48);
 	border-radius: 10px;
 	color: #FFF;
 	padding-left: 20 px;
@@ -929,9 +929,6 @@ p, li { white-space: pre-wrap; }
       <width>41</width>
       <height>41</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/Icon_gav/Icon_GAV.jpg);</string>
     </property>
     <property name="text">
      <string/>
