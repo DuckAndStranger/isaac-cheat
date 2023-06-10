@@ -48,9 +48,9 @@ class Changeable:
         except:
             winsound.PlaySound("ButtonClick.wav", 1)
             if language == "ru": 
-                error_ru.exec
+                error_ru.exec()
             else:
-                error_en.exec
+                error_en.exec()
 
 coins = Changeable("coins")
 bombs = Changeable("bombs")
@@ -85,8 +85,6 @@ def inf_hook():
                 hook_error_ru.exec()
             else:
                 hook_error_en.exec()
-        else:
-            winsound.PlaySound("")
     except:
         pass
 
