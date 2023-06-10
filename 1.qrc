@@ -1,5 +1,0 @@
-<RCC>
-  <qresource prefix="newPrefix">
-    <file>bomb.png</file>
-  </qresource>
-</RCC>
