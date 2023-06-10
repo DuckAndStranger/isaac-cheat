@@ -1,4 +1,3 @@
-import PySimpleGUI as sg
 from ReadWriteMemory import ReadWriteMemory
 from threading import Thread
 from pynput import keyboard
