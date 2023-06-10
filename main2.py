@@ -5,51 +5,17 @@ from pynput import keyboard
 from time import sleep
 import winsound
 import sys
+from PyQt6 import uic
+from PyQt6.QtWidgets import QApplication,  QMainWindow, QDialog
+from PyQt6.QtGui import QIntValidator
+
 
 #variables
 pointers = {}
 check = {"coins": 0, 'bombs': 0, 'keys': 0, 'red_hearts': 0, "charges": 0, 'dmg': 0, "blue_hearts": 0, "active_item": 0,"coin_hearts":0}
 language = "ru"
-language1 = "ru"
-win_close = False
-###############################################################################
 
-#ui
-sg.theme('DarkAmber')
-def layout(language):
-    if language == "ru":
-        main_window_layout = [  
-        [sg.Text("Только целые числа",s=49),sg.Button("Hook",key="new_run",s=6),sg.Button("RU/EN",key = "Change_language",s=5)],
-        [sg.Text('Монеты',s=8), sg.InputText(),sg.Button("Изменить",key="Change_coins"),sg.Button("∞ 99",key="inf_coins",s=4)],
-        [sg.Text('Бомбы',s=8), sg.InputText(),sg.Button("Изменить",key="Change_bombs"),sg.Button("∞ 99",key="inf_bombs",s=4)],
-        [sg.Text('Ключи',s=8), sg.InputText(),sg.Button("Изменить",key="Change_keys"),sg.Button("∞ 99",key="inf_keys",s=4)],
-        [sg.Text("ID Активки",s=8),sg.InputText(),sg.Button("Изменить",key="Change_active_item"),sg.Button("D6",key="give_d6",s=4)],
-        [sg.Frame("",[[sg.Text("Left ctrl + 1 - Hook",s=32),sg.Text("Left ctrl + 6 - Бесконечные бомбы",s=29)],
-        [sg.Text("Left ctrl + 2 - Бесконечные красные сердца",s=32),sg.Text("Left ctrl + 7 - Бесконечные ключи",s=29)],
-        [sg.Text("Left ctrl + 3 - Бесконечные синие сердца",s=32),sg.Text("Left ctrl + 8 - Бесконечная энергия",s=29)],
-        [sg.Text("Left ctrl + 4 - Бесконечные сердца-монеты",s=32),sg.Text("Left ctrl + 9 - 100 урона",s=29)],
-        [sg.Text("Left ctrl + 5 - Бесконечные монеты")]])],
-        [sg.Button("Бесконечная энергия",key="inf_charges"),sg.Button("100 Урона",key="100 Damage",s=13),sg.Button("Бесконечные сердца-монеты",key="inf_coin_heart")],
-        [sg.Button("Бесконечные красные сердца",key="inf_red_heart"),sg.Button("Бесконечные синие сердца",key="inf_blue_heart",s=21)],
-        [sg.Text("")],
-        [sg.Button('Выход',key="Exit"),sg.Text("",s=35),sg.Text("Made by GAVKOSHMIG Inc.")]]
-    else:
-        main_window_layout = [  
-        [sg.Text("Only integer numbers",s=49),sg.Button("Hook",key="new_run",s=6),sg.Button("RU/EN",key = "Change_language",s=5)],
-        [sg.Text('Coins',s=8), sg.InputText(),sg.Button("Change",key="Change_coins"),sg.Button("Inf 99",key="inf_coins",s=4)],
-        [sg.Text('Bombs',s=8), sg.InputText(),sg.Button("Change",key="Change_bombs"),sg.Button("Inf 99",key="inf_bombs",s=4)],
-        [sg.Text('Keys',s=8), sg.InputText(),sg.Button("Change",key="Change_keys"),sg.Button("Inf 99",key="inf_keys",s=4)],
-        [sg.Text("Active item ID",s=10),sg.InputText(s=43),sg.Button("Change",key="Change_active_item"),sg.Button("D6",key="give_d6",s=4)],
-        [sg.Frame("",[[sg.Text("Left ctrl + 1 - Hook",s=28),sg.Text("Left ctrl + 6 - Inf bombs",s=32)],
-        [sg.Text("Left ctrl + 2 - Inf red hearts",s=28),sg.Text("Left ctrl + 7 - Inf keys",s=32)],
-        [sg.Text("Left ctrl + 3 - Inf blue hearts",s=28),sg.Text("Left ctrl + 8 - Inf active item",s=32)],
-        [sg.Text("Left ctrl + 4 - Inf coins hearts",s=28),sg.Text("Left ctrl + 9 - 100 Dmg")],
-        [sg.Text("Left ctrl + 5 - Inf coins")]])],
-        [sg.Button("Inf active item charge",key="inf_charges"),sg.Button("100 Damage",key="100 Damage",s=13),sg.Button("Inf coins hearts",key="inf_coin_heart")],
-        [sg.Button("Inf red hearts",key="inf_red_heart"),sg.Button("Inf blue hearts",key="inf_blue_heart",s=19)],
-        [sg.Text("")],
-        [sg.Button('Exit',key="Exit"),sg.Text("",s=35),sg.Text("Made by GAVKOSHMIG Inc.")]]
-    return sg.Window("Isaac's cheats",main_window_layout)
+
 ###############################################################################
 
 #funcs
@@ -57,19 +23,6 @@ def writei(name, count):
     global process
     process.write(pointers[name],count)
 
-def languageChange():
-    global window, language
-    window.close()
-    if language == "ru":
-        language = "en"
-        window = (layout(language))
-    else:
-        language = "ru"
-        window = (layout(language))
-
-def close():
-    global win_close
-    win_close = True
 
 ###############################################################################
 
@@ -110,9 +63,9 @@ class Changeable:
         except:
             winsound.PlaySound("ButtonClick.wav", 1)
             if language == "ru": 
-                sg.popup("Ошибка!", title="Ошибка!")
+                error_ru.exec()
             else:
-                sg.popup("Error!",title="Error!")
+                error_en.exec()
 
 coins = Changeable("coins")
 bombs = Changeable("bombs")
@@ -123,44 +76,6 @@ coin_hearts = Changeable("coin_hearts",24)
 charge = Changeable("charges")
 dmg = Changeable("dmg", 1120403000)
 active = Changeable("active_item")
-###############################################################################
-
-#window logic
-window = (layout(language))
-def main():
-    global window
-    event, values = window.read(timeout=10)
-    if values == None:
-        values = [None, None, None, None]
-
-    eventFunc = {
-        "inf_coins": coins.infWrite,
-        "inf_bombs": bombs.infWrite,
-        "inf_keys": keys.infWrite,
-        "inf_red_heart": red_hearts.infWrite,
-        "inf_coin_heart": coin_hearts.infWrite,
-        "inf_charges": charge.infWrite,
-        "100 Damage": dmg.infWrite,
-        "inf_blue_heart": blue_hearts.infWrite,
-        "Change_coins": [coins.write, values[0]],
-        "Change_bombs": [bombs.write, values[1]],
-        "Change_keys": [keys.write, values[2]],
-        "Change_active_item": [active.write, values[3]],
-        "give_d6": [active.write, 105],
-        "inf_coins_herts":coin_hearts.infWrite,
-        "new_run":  inf_hook,
-        "Change_language": languageChange,
-        "Exit": close,
-        sg.WIN_CLOSED:close
-    }
-    if event == '__TIMEOUT__':
-        pass
-    elif type(eventFunc[event]) == list:
-        eventFunc[event][0](eventFunc[event][1])
-    else:
-        eventFunc[event]()
-###############################################################################
-
 
 ###############################################################################
 
@@ -180,12 +95,11 @@ def inf_hook():
         pointers["active_item"] = process.get_pointer(address,offsets=[0x8,0x1C,0x9F0,0x30,0x358,0x0,0x14C4])
         pointers["blue_hearts"] = process.get_pointer(address,offsets=[0x4,0x1C,0x9D0,0x50,0x358,0x0,0x129C])
         if pointers["coins"] == 4792:
+            winsound.PlaySound("ButtonClick.wav", 1)
             if language == "ru":
-                winsound.PlaySound("ButtonClick.wav", 1)
-                sg.popup("Невозможно захватить процесс, перезапустите игру/забег!",title="ERROR!")
+                hook_error_ru.exec()
             else:
-                winsound.PlaySound("ButtonClick.wav", 1)
-                sg.popup("Can't hook process, restart the game/the run!",title="ERROR!")
+                hook_error_en.exec()
     except:
         pass
 
@@ -207,41 +121,29 @@ def hotkeys():
         hotkey.join()
 Thread(target=hotkeys,daemon=True).start()
 
-#baza 
-# while True:
-#     main()
-#     if win_close == True:
-#         break
-#     else: main()
-############################################################################## 1112014848
-
-
-
-
-
-
-import sys
-from PyQt6 import uic, QtGui, QtCore
-from PyQt6.QtWidgets import QApplication,  QMainWindow, QLineEdit
-from PyQt6.QtGui import QIntValidator
+###############################################################################
 
 def languageChange1():
-    global language1,w,w1
-    if language1 == "ru":
-        w.close()
-        w1.show()
-        language1 = "eng"
+    global language,Main_WindowRU,Main_WindowEN
+    if language == "ru":
+        Main_WindowRU.close()
+        Main_WindowEN.show()
+        language = "eng"
     else:
-        w1.close()
-        w.show()
-        language1 = "ru"
+        Main_WindowEN.close()
+        Main_WindowRU.show()
+        language = "ru"
 
-Form,  w = uic.loadUiType("Interface_RU4.ui")
-Form1,  w1 = uic.loadUiType("Interface_ENG4.ui")
+Form_Main_WindowRU,  Main_WindowRU = uic.loadUiType("Interface_RU10.ui")
+Form_Main_Window_EN,  Main_WindowEN = uic.loadUiType("Interface_EN7.ui")
+Form_ErrorEN, WErrorEN = uic.loadUiType("Error_EN2.ui")
+Form_ErrorRU, WErrorRU = uic.loadUiType("Error_RU2.ui")
+Form_Hook_ErrorEN, W_Hook_ErrorEN = uic.loadUiType("Error_Hook_EN2.ui")
+Form_Hook_ErrorRU, W_Hook_ErrorRU = uic.loadUiType("Error_Hook_RU2.ui")
 
-class Ui(QMainWindow, Form):
+class MainUIWindowRU(QMainWindow, Form_Main_WindowRU):
     def __init__(self):
-        super(Ui, self).__init__()
+        super(MainUIWindowRU, self).__init__()
         self.setupUi(self)
         self.Inf_blue_hearts.clicked.connect(blue_hearts.infWrite)
         self.D6_btn.clicked.connect(lambda: active.write(105))
@@ -273,9 +175,9 @@ class Ui(QMainWindow, Form):
 
         self.Language_btn.clicked.connect(languageChange1)
 
-class UiE(QMainWindow, Form1):
+class MainUIWindowEN(QMainWindow, Form_Main_Window_EN):
     def __init__(self):
-        super(UiE, self).__init__()
+        super(MainUIWindowEN, self).__init__()
         self.setupUi(self)
         self.Inf_blue_hearts.clicked.connect(blue_hearts.infWrite)
         self.D6_btn.clicked.connect(lambda: active.write(105))
@@ -307,32 +209,40 @@ class UiE(QMainWindow, Form1):
 
         self.Language_btn.clicked.connect(languageChange1)
 
+class Error_Window_EN(QDialog, Form_ErrorEN):
+    def __init__(self):
+        super(Error_Window_EN, self).__init__()
+        self.setupUi(self)
+        self.OK_btn.clicked.connect(self.close)
 
-        # "inf_coins": coins.infWrite,
-        # "inf_bombs": bombs.infWrite,
-        # "inf_keys": keys.infWrite,
-        # "inf_red_heart": red_hearts.infWrite,
-        # "inf_coin_heart": coin_hearts.infWrite,
-        # "inf_charges": charge.infWrite,
-        # "100 Damage": dmg.infWrite,
-        # "inf_blue_heart": blue_hearts.infWrite,
-        # "Change_coins": [coins.write, values[0]],
-        # "Change_bombs": [bombs.write, values[1]],
-        # "Change_keys": [keys.write, values[2]],
-        # "Change_active_item": [active.write, values[3]],
-        # "give_d6": [active.write, 105],
-        # "inf_coins_herts":coin_hearts.infWrite,
-        # "new_run":  inf_hook,
-        # "Change_language": languageChange,
-        # "Exit": close,
-        
-#self..clicked.connect()
-    
-if language1 =="ru":
+class Error_Window_RU(QDialog, Form_ErrorRU):
+    def __init__(self):
+        super(Error_Window_RU, self).__init__()
+        self.setupUi(self)
+        self.OK_btn.clicked.connect(self.close)    
+
+class Hook_Error_Window_EN(QDialog, Form_Hook_ErrorEN):
+    def __init__(self):
+        super(Hook_Error_Window_EN, self).__init__()
+        self.setupUi(self)
+        self.OK_btn.clicked.connect(self.close)
+
+class Hook_Error_Window_RU(QDialog, Form_Hook_ErrorRU):
+    def __init__(self):
+        super(Hook_Error_Window_RU, self).__init__()
+        self.setupUi(self)
+        self.OK_btn.clicked.connect(self.close)    
+
+
+if language =="ru":
     app = QApplication(sys.argv)
-    w = Ui()
-    w1 = UiE()
-    w.show()
+    Main_WindowRU = MainUIWindowRU()
+    Main_WindowEN = MainUIWindowEN()
+    error_en = Error_Window_EN()
+    error_ru = Error_Window_RU()
+    hook_error_ru = Hook_Error_Window_RU()
+    hook_error_en = Hook_Error_Window_EN()
+    Main_WindowRU.show()
     sys.exit(app.exec())
 
 
