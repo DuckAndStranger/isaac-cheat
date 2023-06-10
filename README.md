@@ -16,8 +16,8 @@
 Python 3.11.2+
 OS: Windows 11
 # Установка
-При создании был испрользована отличная от того что есть в pip библеотека ReadWriteMemory.
-Чтобы использовать такую же версию нужно:
+При создании была использована библиотека ReadWriteMemory не из pip.
+Чтобы использовать такую же как здесь версию нужно:
 1. Скачать __init__.py с этого [репозитория.](https://github.com/vsantiago113/ReadWriteMemory/blob/master/ReadWriteMemory/__init__.py)
 2. Поставить вместо того что лежит в вашей папке ReadWriteMemory
 # Оформление
