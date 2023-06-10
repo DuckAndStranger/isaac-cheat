@@ -23,21 +23,6 @@ def writei(name, count):
     global process
     process.write(pointers[name],count)
 
-
-###############################################################################
-
-#error window
-def write_and_error_window(value,thing):
-    try:
-        writei(thing, int(value))
-    except:
-        winsound.PlaySound("ButtonClick.wav", 1)
-        if language == "ru": 
-            text = "Ошбика!"
-        else: 
-            text = "ERROR!"
-        sg.popup(text, title="ERROR!")
-
 ###############################################################################
 
 #class
@@ -63,9 +48,9 @@ class Changeable:
         except:
             winsound.PlaySound("ButtonClick.wav", 1)
             if language == "ru": 
-                error_ru.exec()
+                error_ru.exec
             else:
-                error_en.exec()
+                error_en.exec
 
 coins = Changeable("coins")
 bombs = Changeable("bombs")
@@ -100,6 +85,8 @@ def inf_hook():
                 hook_error_ru.exec()
             else:
                 hook_error_en.exec()
+        else:
+            winsound.PlaySound("")
     except:
         pass
 
