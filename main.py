@@ -79,6 +79,7 @@ def inf_hook():
         pointers["charges"] = process.get_pointer(address,offsets=[0x4,0x0,0x4,0x1C,0xCF8,0x0,0x14C8])
         pointers["active_item"] = process.get_pointer(address,offsets=[0x8,0x1C,0x9F0,0x30,0x358,0x0,0x14C4])
         pointers["blue_hearts"] = process.get_pointer(address,offsets=[0x4,0x1C,0x9D0,0x50,0x358,0x0,0x129C])
+        pointers["coin_hearts"] = process.get_pointer(address,offsets=[0x8,0x3c,0x1c,0x9D0,0x358,0x0,0x1294])
         if pointers["coins"] == 4792:
             winsound.PlaySound("ButtonClick.wav", 1)
             if language == "ru":
