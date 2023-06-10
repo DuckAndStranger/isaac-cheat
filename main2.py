@@ -206,9 +206,39 @@ def hotkeys():
 Thread(target=hotkeys,daemon=True).start()
 
 #baza 
-while True:
-    main()
-    if win_close == True:
-        break
-    else: main()
+# while True:
+#     main()
+#     if win_close == True:
+#         break
+#     else: main()
 ############################################################################## 1112014848
+
+
+
+
+
+
+import sys
+from PyQt6 import uic
+from PyQt6.QtWidgets import QApplication,  QMainWindow
+from Interface_RU2 import Ui_MainWindow
+
+
+
+Form,  _ = uic.loadUiType("Interface_RU2.ui")
+
+class Ui(QMainWindow,Form):
+    def __init__(self):
+        super(Ui, self).__init__()
+        self.setupUi(self)
+        self.Inf_blue_hearts.clicked.connect(self.pushButton_pressed)
+    def pushButton_pressed(self):
+        print(self,"pressed")
+
+
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+    w = Ui()
+    w.show()
+    sys.exit(app.exec())
