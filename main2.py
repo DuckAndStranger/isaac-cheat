@@ -4,11 +4,13 @@ from threading import Thread
 from pynput import keyboard
 from time import sleep
 import winsound
+import sys
 
 #variables
 pointers = {}
 check = {"coins": 0, 'bombs': 0, 'keys': 0, 'red_hearts': 0, "charges": 0, 'dmg': 0, "blue_hearts": 0, "active_item": 0,"coin_hearts":0}
 language = "ru"
+language1 = "ru"
 win_close = False
 ###############################################################################
 
@@ -219,26 +221,118 @@ Thread(target=hotkeys,daemon=True).start()
 
 
 import sys
-from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication,  QMainWindow
-from Interface_RU2 import Ui_MainWindow
+from PyQt6 import uic, QtGui, QtCore
+from PyQt6.QtWidgets import QApplication,  QMainWindow, QLineEdit
+from PyQt6.QtGui import QIntValidator
 
+def languageChange1():
+    global language1,w,w1
+    if language1 == "ru":
+        w.close()
+        w1.show()
+        language1 = "eng"
+    else:
+        w1.close()
+        w.show()
+        language1 = "ru"
 
+Form,  w = uic.loadUiType("Interface_RU4.ui")
+Form1,  w1 = uic.loadUiType("Interface_ENG4.ui")
 
-Form,  _ = uic.loadUiType("Interface_RU2.ui")
-
-class Ui(QMainWindow,Form):
+class Ui(QMainWindow, Form):
     def __init__(self):
         super(Ui, self).__init__()
         self.setupUi(self)
-        self.Inf_blue_hearts.clicked.connect(self.pushButton_pressed)
-    def pushButton_pressed(self):
-        print(self,"pressed")
+        self.Inf_blue_hearts.clicked.connect(blue_hearts.infWrite)
+        self.D6_btn.clicked.connect(lambda: active.write(105))
+        self.Dmg_btn.clicked.connect(dmg.infWrite)
+        self.Inf_energy.clicked.connect(charge.infWrite)
+        self.Inf_hearts_coins.clicked.connect(coin_hearts.infWrite)
+        self.Inf_red_hearts.clicked.connect(red_hearts.infWrite)
+        self.Infinity_bombs.clicked.connect(bombs.infWrite)
+        self.Infinity_coins.clicked.connect(coins.infWrite)
+        self.Infinity_keys.clicked.connect(keys.infWrite)
+        self.Hook_btn.clicked.connect(inf_hook)
+        self.Exit_btn.clicked.connect(sys.exit)
+        coins_input = self.Input_coins
+        coins_input.setValidator(QIntValidator())
+        self.Change_coins.clicked.connect(lambda: coins.write(coins_input.text()))
+
+        bombs_input = self.Input_bombs
+        bombs_input.setValidator(QIntValidator())
+
+        self.Change_bombs.clicked.connect(lambda: bombs.write(bombs_input.text()))
+
+        keys_input = self.Input_keys
+        keys_input.setValidator(QIntValidator())
+        self.Change_keys.clicked.connect(lambda: keys.write(keys_input.text()))
+
+        active_input = self.Input_items
+        active_input.setValidator(QIntValidator())
+        self.Change_items.clicked.connect(lambda: active.write(active_input.text()))
+
+        self.Language_btn.clicked.connect(languageChange1)
+
+class UiE(QMainWindow, Form1):
+    def __init__(self):
+        super(UiE, self).__init__()
+        self.setupUi(self)
+        self.Inf_blue_hearts.clicked.connect(blue_hearts.infWrite)
+        self.D6_btn.clicked.connect(lambda: active.write(105))
+        self.Dmg_btn.clicked.connect(dmg.infWrite)
+        self.Inf_energy.clicked.connect(charge.infWrite)
+        self.Inf_hearts_coins.clicked.connect(coin_hearts.infWrite)
+        self.Inf_red_hearts.clicked.connect(red_hearts.infWrite)
+        self.Infinity_bombs.clicked.connect(bombs.infWrite)
+        self.Infinity_coins.clicked.connect(coins.infWrite)
+        self.Infinity_keys.clicked.connect(keys.infWrite)
+        self.Hook_btn.clicked.connect(inf_hook)
+        self.Exit_btn.clicked.connect(sys.exit)
+        coins_input = self.Input_coins
+        coins_input.setValidator(QIntValidator())
+        self.Change_coins.clicked.connect(lambda: coins.write(coins_input.text()))
+
+        bombs_input = self.Input_bombs
+        bombs_input.setValidator(QIntValidator())
+
+        self.Change_bombs.clicked.connect(lambda: bombs.write(bombs_input.text()))
+
+        keys_input = self.Input_keys
+        keys_input.setValidator(QIntValidator())
+        self.Change_keys.clicked.connect(lambda: keys.write(keys_input.text()))
+
+        active_input = self.Input_items
+        active_input.setValidator(QIntValidator())
+        self.Change_items.clicked.connect(lambda: active.write(active_input.text()))
+
+        self.Language_btn.clicked.connect(languageChange1)
 
 
-if __name__ == "__main__":
-    import sys
+        # "inf_coins": coins.infWrite,
+        # "inf_bombs": bombs.infWrite,
+        # "inf_keys": keys.infWrite,
+        # "inf_red_heart": red_hearts.infWrite,
+        # "inf_coin_heart": coin_hearts.infWrite,
+        # "inf_charges": charge.infWrite,
+        # "100 Damage": dmg.infWrite,
+        # "inf_blue_heart": blue_hearts.infWrite,
+        # "Change_coins": [coins.write, values[0]],
+        # "Change_bombs": [bombs.write, values[1]],
+        # "Change_keys": [keys.write, values[2]],
+        # "Change_active_item": [active.write, values[3]],
+        # "give_d6": [active.write, 105],
+        # "inf_coins_herts":coin_hearts.infWrite,
+        # "new_run":  inf_hook,
+        # "Change_language": languageChange,
+        # "Exit": close,
+        
+#self..clicked.connect()
+    
+if language1 =="ru":
     app = QApplication(sys.argv)
     w = Ui()
+    w1 = UiE()
     w.show()
     sys.exit(app.exec())
+
+
