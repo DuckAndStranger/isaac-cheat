@@ -934,6 +934,71 @@ p, li { white-space: pre-wrap; }
      <pixmap>imgonline-com-ua-Resize-FJDPqgFmfYQzOIw.jpg</pixmap>
     </property>
    </widget>
+   <widget class="QLineEdit" name="Input_items_2">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>590</y>
+      <width>141</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	border: 2px solid rgb(37, 39, 48);
+	border-radius: 10px;
+	color: #FFF;
+	padding-left: 20 px;
+	padding-right: 20 px;
+	background-color: rgb(97, 97, 97);
+}
+QLineEdit:hover{
+	border: 2px solid rgb(104, 104, 104);
+}
+QLineEdit:focus{
+	border: 2px solid rgb(255, 255, 255);
+	
+	background-color: rgb(141, 141, 141);
+}</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Dmg_btn_2">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>590</y>
+      <width>241</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+    border-radius: 6px;
+	background-color: rgb(69, 69, 69);
+    min-width: 80px;
+}
+QPushButton:hover{
+	border: 2px solid rgb(50, 50, 50);
+}
+QPushButton:pressed {
+	background-color: rgb(64, 64, 64);
+}
+
+QPushButton:flat {
+    border: none; 
+}
+
+QPushButton:default {
+    border-color: navy; 
+}</string>
+    </property>
+    <property name="text">
+     <string>100 урона</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="Switch_off">
+    <file>Switch_white.png</file>
+  </qresource>
+  <qresource prefix="Switch_on">
+    <file>Switch_green2.png</file>
+  </qresource>
+</RCC>
