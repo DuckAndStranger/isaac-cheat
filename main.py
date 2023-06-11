@@ -129,7 +129,7 @@ def languageChange1():
         Main_WindowRU.show()
         language = "ru"
 
-Form_Main_WindowRU,  Main_WindowRU = uic.loadUiType("Interface_RU14.ui")
+Form_Main_WindowRU,  Main_WindowRU = uic.loadUiType("Interface_RU10.ui")
 Form_Main_Window_EN,  Main_WindowEN = uic.loadUiType("Interface_EN7.ui")
 Form_ErrorEN, WErrorEN = uic.loadUiType("Error_EN2.ui")
 Form_ErrorRU, WErrorRU = uic.loadUiType("Error_RU2.ui")
@@ -176,7 +176,7 @@ class MainUIWindowRU(QMainWindow, Form_Main_WindowRU):
         # self.Dmg_btn_2.clicked.connect(lambda: dmg.write(dmg_input.text(),f=True))
 
 
-        self.checkBox.stateChanged.connect(coins.infWrite)
+        #self.checkBox.stateChanged.connect(coins.infWrite)
 
 
 
