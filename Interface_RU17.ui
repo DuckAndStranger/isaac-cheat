@@ -1385,6 +1385,42 @@ QLineEdit:focus{
 }</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="Dmg_100">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>650</y>
+      <width>241</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+    border-radius: 6px;
+	background-color: rgb(69, 69, 69);
+    min-width: 80px;
+}
+QPushButton:hover{
+	border: 2px solid rgb(50, 50, 50);
+}
+QPushButton:pressed {
+	background-color: rgb(64, 64, 64);
+}
+
+QPushButton:flat {
+    border: none; 
+}
+
+QPushButton:default {
+    border-color: navy; 
+}</string>
+    </property>
+    <property name="text">
+     <string>100 Урона</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

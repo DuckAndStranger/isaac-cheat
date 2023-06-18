@@ -38,7 +38,10 @@ class Changeable:
                             pm.write_int(pointers[self.name],self.num)
                             sleep(1)
                 else:
-                    value = float(value.replace(",","."))
+                    try:
+                        value =float(value.replace(",","."))
+                    except:
+                        value=float(value)
                     while check[self.name] == True:
                             pm.write_float(pointers[self.name],self.num)
                             sleep(1)                    
@@ -52,7 +55,10 @@ class Changeable:
                 value = int(value)
                 pm.write_int(pointers[self.name],value)
             else:
-                value = float(value.replace(",","."))
+                try:
+                    value = float(value.replace(",","."))
+                except:
+                    value=float(value)
                 pm.write_float(pointers[self.name],value)
         except:
             winsound.PlaySound("ButtonClick.wav", 1)
@@ -99,8 +105,6 @@ def inf_hook():
         pointers["shot_spd"] = process.get_pointer(address,offsets=[0x4,0x54,0x9F0,0x23C,0x16C,0x0,0x13AC])
         pointers["trinket"] = process.get_pointer(address,offsets=[0x1C,0x9D0,0x21C,0x50,0x16C,0x0,0x15E8])
         pointers["luck"] = process.get_pointer(address,offsets=[0x8,0x4,0x1C,0x9F0,0x358,0x0,0x14B0])
-
-
 
         winsound.PlaySound("ButtonClick.wav", 1)
         if pointers["coins"] == 4792:
@@ -168,6 +172,7 @@ class MainUIWindowRU(QMainWindow, Form_Main_WindowRU):
         self.Hook_btn.clicked.connect(inf_hook)
         self.Exit_btn.clicked.connect(sys.exit)
         self.Language_btn.clicked.connect(languageChange1)
+        self.Dmg_100.clicked.connect(lambda: dmg.write(100,f=True))
 
         coins_input = self.Input_coins
         coins_input.setValidator(QIntValidator())
@@ -175,7 +180,6 @@ class MainUIWindowRU(QMainWindow, Form_Main_WindowRU):
 
         bombs_input = self.Input_bombs
         bombs_input.setValidator(QIntValidator())
-
         self.Change_bombs.clicked.connect(lambda: bombs.write(bombs_input.text()))
 
         keys_input = self.Input_keys
