@@ -8,7 +8,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication,  QMainWindow, QDialog
 from PyQt6.QtGui import QIntValidator, QDoubleValidator
 from pymem import Pymem
-
+import webbrowser
 
 
 #variables
@@ -17,7 +17,7 @@ check = {"coins": False, 'bombs': False, 'keys': False, 'red_hearts': False, "ch
 language = "ru"
 
 
-###############################################################################
+############################################################################### 13A8
 
 
 #class
@@ -27,7 +27,6 @@ class Changeable:
         self.num = num
     def infWrite(self,f=False):
         global check
-        print(check)
         if check[self.name] == False:
             check[self.name] = True
             def everlasting():
@@ -36,7 +35,7 @@ class Changeable:
                     self.num = int(self.num)
                     while check[self.name] == True:
                             pm.write_int(pointers[self.name],self.num)
-                            sleep(1)
+                            sleep(0.5)
                 else:
                     try:
                         value =float(value.replace(",","."))
@@ -44,7 +43,7 @@ class Changeable:
                         value=float(value)
                     while check[self.name] == True:
                             pm.write_float(pointers[self.name],self.num)
-                            sleep(1)                    
+                            sleep(0.5)                    
             Thread(target=everlasting,daemon=True).start()
         else:
             check[self.name] = False
@@ -80,9 +79,10 @@ spd = Changeable("spd")
 shot_spd= Changeable("shot_spd")
 trinket = Changeable("trinket")
 luck = Changeable("luck")
+tears = Changeable("tears")
 
 
-###############################################################################  014E99BE 5099BE
+###############################################################################  014E99BE 5099BE 0x15E8 13A8
 
 #process hook and pointers
 def inf_hook():
@@ -100,11 +100,13 @@ def inf_hook():
         pointers["charges"] = process.get_pointer(address,offsets=[0x4,0x0,0x4,0x1C,0xCF8,0x0,0x14C8])
         pointers["active_item"] = process.get_pointer(address,offsets=[0x8,0x1C,0x9F0,0x30,0x358,0x0,0x14C4])
         pointers["blue_hearts"] = process.get_pointer(address,offsets=[0x4,0x1C,0x9D0,0x50,0x358,0x0,0x129C])
-        pointers["coin_hearts"] = process.get_pointer(address,offsets=[0x8,0x3c,0x1c,0x9D0,0x358,0x0,0x1294])
+        pointers["coin_hearts"] = process.get_pointer(address,offsets=[0x4,0x1C,0xBDC,0x30,0x16C,0x0,0x1294])
         pointers["spd"] = process.get_pointer(address,offsets=[0x4,0x1C,0xCF8,0x0,0x39C,0x258,0xF18])
         pointers["shot_spd"] = process.get_pointer(address,offsets=[0x4,0x54,0x9F0,0x23C,0x16C,0x0,0x13AC])
-        pointers["trinket"] = process.get_pointer(address,offsets=[0x1C,0x9D0,0x21C,0x50,0x16C,0x0,0x15E8])
+        pointers["trinket"] = process.get_pointer(address,offsets=[0x8,0x1C,0xBBC,0x50,0x16C,0x0,0x15E8])
         pointers["luck"] = process.get_pointer(address,offsets=[0x8,0x4,0x1C,0x9F0,0x358,0x0,0x14B0])
+        pointers["tears"] = process.get_pointer(address,offsets=[0x4,0x8,0x1C,0x9D0,0x358,0x0,0x13A8])
+        print(pm.read_float(pointers["tears"]))
 
         winsound.PlaySound("ButtonClick.wav", 1)
         if pointers["coins"] == 4792:
@@ -129,7 +131,7 @@ def hotkeys():
         "<ctrl>+6":bombs.infWrite,
         "<ctrl>+7":keys.infWrite,
         "<ctrl>+8":charge.infWrite,
-        "<ctrl>+9":dmg.infWrite}) as hotkey:
+        "<ctrl>+9":lambda: dmg.write(100,f=True)}) as hotkey:
         hotkey.join()
 Thread(target=hotkeys,daemon=True).start()
 
@@ -173,6 +175,8 @@ class MainUIWindowRU(QMainWindow, Form_Main_WindowRU):
         self.Exit_btn.clicked.connect(sys.exit)
         self.Language_btn.clicked.connect(languageChange1)
         self.Dmg_100.clicked.connect(lambda: dmg.write(100,f=True))
+        self.Trinket_btn.clicked.connect(lambda: trinket.write(23))
+        self.Author_btn.clicked.connect(lambda: webbrowser.open("https://github.com/DuckAndStranger/isaac-cheat"))
 
         coins_input = self.Input_coins
         coins_input.setValidator(QIntValidator())
@@ -210,6 +214,10 @@ class MainUIWindowRU(QMainWindow, Form_Main_WindowRU):
         luck_input.setValidator(QDoubleValidator())
         self.Change_luck.clicked.connect(lambda: luck.write(luck_input.text(),f=True))
 
+        tears_input = self.Input_tears
+        tears_input.setValidator(QDoubleValidator())
+        self.Change_tears.clicked.connect(lambda: tears.write(tears_input.text(),f=True))
+
 
 
 class MainUIWindowEN(QMainWindow, Form_Main_Window_EN):
@@ -218,7 +226,6 @@ class MainUIWindowEN(QMainWindow, Form_Main_Window_EN):
         self.setupUi(self)
         self.Inf_blue_hearts.clicked.connect(blue_hearts.infWrite)
         self.D6_btn.clicked.connect(lambda: active.write(105))
-        self.Dmg_btn.clicked.connect(dmg.infWrite)
         self.Inf_energy.clicked.connect(charge.infWrite)
         self.Inf_hearts_coins.clicked.connect(coin_hearts.infWrite)
         self.Inf_red_hearts.clicked.connect(red_hearts.infWrite)
@@ -228,13 +235,16 @@ class MainUIWindowEN(QMainWindow, Form_Main_Window_EN):
         self.Hook_btn.clicked.connect(inf_hook)
         self.Exit_btn.clicked.connect(sys.exit)
         self.Language_btn.clicked.connect(languageChange1)
+        self.Dmg_100.clicked.connect(lambda: dmg.write(100,f=True))
+        self.Trinket_btn.clicked.connect(lambda: trinket.write(23))
+        self.Author_btn.clicked.connect(lambda: webbrowser.open("https://github.com/DuckAndStranger/isaac-cheat"))
+
         coins_input = self.Input_coins
         coins_input.setValidator(QIntValidator())
         self.Change_coins.clicked.connect(lambda: coins.write(coins_input.text()))
 
         bombs_input = self.Input_bombs
         bombs_input.setValidator(QIntValidator())
-
         self.Change_bombs.clicked.connect(lambda: bombs.write(bombs_input.text()))
 
         keys_input = self.Input_keys
@@ -245,7 +255,29 @@ class MainUIWindowEN(QMainWindow, Form_Main_Window_EN):
         active_input.setValidator(QIntValidator())
         self.Change_items.clicked.connect(lambda: active.write(active_input.text()))
 
+        dmg_input = self.Input_dmg
+        dmg_input.setValidator(QDoubleValidator())
+        self.Change_dmg.clicked.connect(lambda: dmg.write(dmg_input.text(),f=True))
 
+        spd_input = self.Input_spd
+        spd_input.setValidator(QDoubleValidator())
+        self.Change_spd.clicked.connect(lambda: spd.write(spd_input.text(),f=True))
+
+        shot_spd_input = self.Input_shot_spd
+        shot_spd_input.setValidator(QDoubleValidator())
+        self.Change_shot_spd.clicked.connect(lambda: shot_spd.write(shot_spd_input.text(),f=True))
+
+        trinket_input = self.Input_trinket
+        trinket_input.setValidator(QIntValidator())
+        self.Change_trinket.clicked.connect(lambda: trinket.write(trinket_input.text()))
+
+        luck_input = self.Input_luck
+        luck_input.setValidator(QDoubleValidator())
+        self.Change_luck.clicked.connect(lambda: luck.write(luck_input.text(),f=True))
+
+        tears_input = self.Input_tears
+        tears_input.setValidator(QDoubleValidator())
+        self.Change_tears.clicked.connect(lambda: tears.write(tears_input.text(),f=True))
 
 
 
@@ -275,35 +307,6 @@ class Hook_Error_Window_RU(QDialog, Form_Hook_ErrorRU):
         super(Hook_Error_Window_RU, self).__init__()
         self.setupUi(self)
         self.OK_btn.clicked.connect(self.close)    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if language =="ru":

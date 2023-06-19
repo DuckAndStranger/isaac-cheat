@@ -13,6 +13,24 @@
     <height>792</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1019</width>
+    <height>792</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1019</width>
+    <height>792</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Isaac`s Cheats</string>
   </property>
@@ -170,7 +188,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -322,7 +340,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -358,7 +376,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -394,7 +412,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -430,7 +448,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -443,6 +461,12 @@ QPushButton:default {
     </property>
     <property name="text">
      <string>∞ 99</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="Infinity_bombs">
@@ -466,7 +490,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -502,7 +526,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -538,7 +562,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -557,7 +581,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>590</y>
+      <y>610</y>
       <width>241</width>
       <height>50</height>
      </rect>
@@ -574,7 +598,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -593,7 +617,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>530</y>
+      <y>550</y>
       <width>241</width>
       <height>50</height>
      </rect>
@@ -610,7 +634,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -629,7 +653,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>261</x>
-      <y>410</y>
+      <y>430</y>
       <width>241</width>
       <height>50</height>
      </rect>
@@ -646,7 +670,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -665,7 +689,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>470</y>
+      <y>490</y>
       <width>241</width>
       <height>50</height>
      </rect>
@@ -682,7 +706,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -701,9 +725,9 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>720</y>
+      <y>730</y>
       <width>120</width>
-      <height>50</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -718,7 +742,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -737,7 +761,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>410</y>
+      <y>430</y>
       <width>231</width>
       <height>291</height>
      </rect>
@@ -788,7 +812,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -824,7 +848,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -839,36 +863,11 @@ QPushButton:default {
      <string>Hook</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="Author_btn">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>740</y>
-      <width>191</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QTextBrowser{
-	color: rgb(0, 0, 0);
-	border-radius: 10px;
-	border: 2px solid;
-	background-color: qconicalgradient(cx:0.5, cy:0.5, angle:0, stop:0 rgba(136, 106, 22, 255), stop:0.119403 rgba(166, 140, 41, 255), stop:0.233831 rgba(204, 181, 74, 255), stop:0.293532 rgba(235, 219, 102, 255), stop:0.383085 rgba(245, 236, 112, 255), stop:0.502488 rgba(209, 190, 76, 255), stop:0.57 rgba(187, 156, 51, 255), stop:0.61194 rgba(168, 142, 42, 255), stop:0.695 rgba(202, 174, 68, 255), stop:0.75 rgba(218, 202, 86, 255), stop:0.80597 rgba(208, 187, 73, 255), stop:0.835821 rgba(187, 156, 51, 255), stop:0.890547 rgba(137, 108, 26, 255));
-}</string>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:7.8pt;&quot;&gt;   Made by GAVKOSHMIG Inc.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>730</y>
+      <x>950</x>
+      <y>740</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -884,7 +883,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>880</x>
-      <y>190</y>
+      <y>310</y>
       <width>120</width>
       <height>50</height>
      </rect>
@@ -901,7 +900,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -920,7 +919,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>730</x>
-      <y>190</y>
+      <y>310</y>
       <width>141</width>
       <height>50</height>
      </rect>
@@ -949,7 +948,7 @@ QLineEdit:focus{
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>190</y>
+      <y>310</y>
       <width>201</width>
       <height>50</height>
      </rect>
@@ -990,7 +989,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -1062,7 +1061,7 @@ QLineEdit:focus{
     <property name="geometry">
      <rect>
       <x>880</x>
-      <y>250</y>
+      <y>370</y>
       <width>120</width>
       <height>50</height>
      </rect>
@@ -1079,7 +1078,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -1098,7 +1097,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>250</y>
+      <y>370</y>
       <width>201</width>
       <height>50</height>
      </rect>
@@ -1122,7 +1121,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>730</x>
-      <y>250</y>
+      <y>370</y>
       <width>141</width>
       <height>50</height>
      </rect>
@@ -1168,7 +1167,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -1183,7 +1182,7 @@ QPushButton:default {
      <string>Изменить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="D6_btn_2">
+   <widget class="QPushButton" name="Trinket_btn">
     <property name="geometry">
      <rect>
       <x>420</x>
@@ -1204,7 +1203,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -1216,7 +1215,7 @@ QPushButton:default {
 }</string>
     </property>
     <property name="text">
-     <string>D6</string>
+     <string>Missing Paper</string>
     </property>
    </widget>
    <widget class="QLabel" name="Active_items_2">
@@ -1300,7 +1299,7 @@ QLineEdit:focus{
     <property name="geometry">
      <rect>
       <x>880</x>
-      <y>130</y>
+      <y>250</y>
       <width>120</width>
       <height>50</height>
      </rect>
@@ -1317,7 +1316,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -1336,7 +1335,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>130</y>
+      <y>250</y>
       <width>201</width>
       <height>50</height>
      </rect>
@@ -1360,7 +1359,7 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>730</x>
-      <y>130</y>
+      <y>250</y>
       <width>141</width>
       <height>50</height>
      </rect>
@@ -1389,7 +1388,7 @@ QLineEdit:focus{
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>650</y>
+      <y>670</y>
       <width>241</width>
       <height>50</height>
      </rect>
@@ -1406,7 +1405,7 @@ QPushButton:hover{
 	border: 2px solid rgb(50, 50, 50);
 }
 QPushButton:pressed {
-	background-color: rgb(64, 64, 64);
+	background-color: rgb(40, 40, 40);
 }
 
 QPushButton:flat {
@@ -1419,6 +1418,130 @@ QPushButton:default {
     </property>
     <property name="text">
      <string>100 Урона</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Author_btn">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>740</y>
+      <width>231</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	color: rgb(0, 0, 0);
+	border-radius: 10px;
+	border: 2px solid;
+	background-color: qconicalgradient(cx:0.5, cy:0.5, angle:0, stop:0.0625 rgba(198, 164, 71, 255), stop:0.225 rgba(166, 140, 41, 255), stop:0.285 rgba(204, 181, 74, 255), stop:0.345 rgba(235, 219, 102, 255), stop:0.415 rgba(245, 236, 112, 255), stop:0.52 rgba(209, 190, 76, 255), stop:0.57 rgba(187, 156, 51, 255), stop:0.635 rgba(168, 142, 42, 255), stop:0.664773 rgba(202, 174, 68, 255), stop:0.767045 rgba(218, 202, 86, 255), stop:0.815 rgba(208, 187, 73, 255), stop:0.88 rgba(221, 184, 60, 255), stop:0.935 rgba(194, 162, 71, 255));
+}
+QPushButton:hover{
+	border: 2px solid rgb(50, 50, 50);
+}
+QPushButton:pressed {
+	background-color: rgb(40, 40, 40);
+}
+
+QPushButton:flat {
+    border: none; 
+}
+
+QPushButton:default {
+    border-color: navy; 
+}</string>
+    </property>
+    <property name="text">
+     <string>Made by GAVKOSHNIG Inc.</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Change_tears">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>130</y>
+      <width>120</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+    border-radius: 6px;
+	background-color: rgb(69, 69, 69);
+    min-width: 80px;
+}
+QPushButton:hover{
+	border: 2px solid rgb(50, 50, 50);
+}
+QPushButton:pressed {
+	background-color: rgb(40, 40, 40);
+}
+
+QPushButton:flat {
+    border: none; 
+}
+
+QPushButton:default {
+    border-color: navy; 
+}</string>
+    </property>
+    <property name="text">
+     <string>Изменить</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Input_tears">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>130</y>
+      <width>141</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	border: 2px solid rgb(37, 39, 48);
+	border-radius: 10px;
+	color: #FFF;
+	padding-left: 20 px;
+	padding-right: 20 px;
+	background-color: rgb(97, 97, 97);
+}
+QLineEdit:hover{
+	border: 2px solid rgb(104, 104, 104);
+}
+QLineEdit:focus{
+	border: 2px solid rgb(255, 255, 255);
+	
+	background-color: rgb(141, 141, 141);
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Shot_spd_3">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>130</y>
+      <width>201</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+	color: rgb(255, 255, 255);
+	font: 75 11pt &quot;MS Shell Dlg 2&quot;;
+	background-color: rgb(53, 53, 53);
+	border-radius: 10px;
+}</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Скорострельность&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;(Меньше число - &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;больше слёз)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="margin">
+     <number>10</number>
     </property>
    </widget>
   </widget>
