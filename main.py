@@ -102,11 +102,12 @@ def inf_hook():
         pointers["blue_hearts"] = process.get_pointer(address,offsets=[0x4,0x1C,0x9D0,0x50,0x358,0x0,0x129C])
         pointers["coin_hearts"] = process.get_pointer(address,offsets=[0x4,0x1C,0xBDC,0x30,0x16C,0x0,0x1294])
         pointers["spd"] = process.get_pointer(address,offsets=[0x4,0x1C,0xCF8,0x0,0x39C,0x258,0xF18])
-        pointers["shot_spd"] = process.get_pointer(address,offsets=[0x4,0x54,0x9F0,0x23C,0x16C,0x0,0x13AC])
+        pointers["shot_spd"] = process.get_pointer(address,offsets=[0x8,0x1C,0x9F0,0x21C,0x16C,0x0,0x13AC])
         pointers["trinket"] = process.get_pointer(address,offsets=[0x8,0x1C,0xBBC,0x50,0x16C,0x0,0x15E8])
         pointers["luck"] = process.get_pointer(address,offsets=[0x8,0x4,0x1C,0x9F0,0x358,0x0,0x14B0])
         pointers["tears"] = process.get_pointer(address,offsets=[0x4,0x8,0x1C,0x9D0,0x358,0x0,0x13A8])
-        print(pm.read_float(pointers["tears"]))
+
+
 
         winsound.PlaySound("ButtonClick.wav", 1)
         if pointers["coins"] == 4792:
@@ -117,7 +118,7 @@ def inf_hook():
     except:
         pass
 
-###############################################################################
+############################################################################### 00B08D8E
 
 #hotkeys
 def hotkeys():
@@ -148,12 +149,25 @@ def languageChange1():
         Main_WindowRU.show()
         language = "ru"
 
-Form_Main_WindowRU,  Main_WindowRU = uic.loadUiType("Interface_RU17.ui")
-Form_Main_Window_EN,  Main_WindowEN = uic.loadUiType("Interface_EN7.ui")
-Form_ErrorEN, WErrorEN = uic.loadUiType("Error_EN2.ui")
-Form_ErrorRU, WErrorRU = uic.loadUiType("Error_RU2.ui")
-Form_Hook_ErrorEN, W_Hook_ErrorEN = uic.loadUiType("Error_Hook_EN2.ui")
-Form_Hook_ErrorRU, W_Hook_ErrorRU = uic.loadUiType("Error_Hook_RU2.ui")
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
+
+
+
+
+Form_Main_WindowRU,  Main_WindowRU = uic.loadUiType(resource_path("Interface_RU17.ui"))
+Form_Main_Window_EN,  Main_WindowEN = uic.loadUiType(resource_path("Interface_EN7.ui"))
+Form_ErrorEN, WErrorEN = uic.loadUiType(resource_path("Error_EN2.ui"))
+Form_ErrorRU, WErrorRU = uic.loadUiType(resource_path("Error_RU2.ui"))
+Form_Hook_ErrorEN, W_Hook_ErrorEN = uic.loadUiType(resource_path("Error_Hook_EN2.ui"))
+Form_Hook_ErrorRU, W_Hook_ErrorRU = uic.loadUiType(resource_path("Error_Hook_RU2.ui"))
 
 
 
